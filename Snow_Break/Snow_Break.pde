@@ -33,7 +33,6 @@ void changeValue() {
 }
 
 void draw() {
-  frameRate(3);
   pg.beginDraw();
   pg.noStroke();
   for (int i = 0; i < simWidth; i++) {
@@ -53,8 +52,9 @@ void draw() {
   pg.textSize(40);
   pg.endDraw();
   PImage img = pg.get();
-  img.resize(1600, 900);
-  image(img, 0, 0);
+  //img.resize(1600, 900);
+  //image(img, 0, 0);
+  image(img, 0, 0, 1600, 900);
   text(frameRate, 50, 50);
   fill(test ? color(0, 255, 0) : color(255, 0, 0));
   ellipse(width/2, height/2, 250, 250);
