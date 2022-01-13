@@ -27,6 +27,10 @@
 			}
 		}
 		bindJavascript(); // calling the function we just wrote to bind Javascript inside the sketch
+		
+		function showValue(val){
+			document.getElementById('testValue').value = val;
+		}
 	
 	</script>
 	
