@@ -1,20 +1,25 @@
+int simWidth = 160;
+int simHeight = 90;
+
 float[][] densities;
 
 PGraphics pg;
 
+
+
 void setup() {
-  size(1000, 200);
+  size(1600, 900);
   background(0);
-  densities = new float[200][40];
-  pg = createGraphics(1000, 200);
+  densities = new float[simWidth][simHeight];
+  pg = createGraphics(simWidth, simHeight);
   pg.noSmooth();
 }
 
 void draw() {
   pg.beginDraw();
   pg.noStroke();
-  for (int i = 0; i < 200; i++) {
-    for (int j = 0; j < 40; j++) {
+  for (int i = 0; i < simWidth; i++) {
+    for (int j = 0; j < simHeight; j++) {
       densities[i][j] = random(0, 255);
     }
   }
@@ -30,5 +35,7 @@ void draw() {
   pg.textSize(40);
   pg.text("fps: " + frameRate, 50, 50);
   pg.endDraw();
-  image(pg, 0, 0);
+  PImage img = pg.get();
+  img.resize(1600, 900);
+  image(img, 0, 0);
 }
