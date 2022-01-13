@@ -16,6 +16,7 @@ void setup() {
 }
 
 void draw() {
+  frameRate(3);
   pg.beginDraw();
   pg.noStroke();
   for (int i = 0; i < simWidth; i++) {
