@@ -7,6 +7,7 @@ void setup() {
   background(0);
   densities = new float[200][40];
   pg = createGraphics(1000, 200);
+  pg.noSmooth();
 }
 
 void draw() {
