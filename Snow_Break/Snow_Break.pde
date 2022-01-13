@@ -3,7 +3,7 @@ float[][] densities;
 PGraphics pg;
 
 void setup() {
-  size(1000, 200);
+  size(1000, 200, P2D);
   background(0);
   densities = new float[200][40];
   pg = createGraphics(1000, 200);
