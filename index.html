@@ -7,17 +7,42 @@
 	<script type="text/javascript" src="/js/processing.js"></script>
 	<script type="text/javascript">
 		function changeVal(ProcessingID){
-			var processingSketch = Processing.getInstanceById(ProcessingID);
-			processingSketch.changeValue();
+			var processingSketch = Processing.getInstanceById(ProcessingID); // find the processing sketch
+			processingSketch.changeValue(); // do something in the processing sketch
 		}
+	</script>
+	
+	<script type="text/javascript">
+		var bound = false;
+		
+		function bindJavascript(){
+			var processingSketch = Processing.getInstanceById('game');
+			if(processingSketch != null){
+				processingSketch.bindJavascript(this); // this "bindJavascript" is a function in the .pde file
+				bound = true;
+			}
+			
+			if(!bound){
+				setTimeout(bindJavascript, 250); // if binding didn't work, try again in 250ms
+			}
+		}
+		bindJavascript(); // calling the function we just wrote to bind Javascript inside the sketch
+		
+		function showValue(val){
+			document.getElementById('testValue').value = val;
+		}
+	
 	</script>
 	
 </head>
 
 <body>
-
 	<canvas id="game" data-processing-sources="/Snow_Break/Snow_Break.pde"></canvas>
 	<br />
 	<button onclick="changeVal('game')"> Example Button </button>
+	<br />
+	<input type="textfield" id="testValue"/>
+	
+	
 </body>
 </html>

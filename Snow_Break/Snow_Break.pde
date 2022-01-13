@@ -1,3 +1,13 @@
+interface JavaScript{
+  void showValue(boolean val);
+}
+
+void bindJavaScript(JavaScript js){
+  javascript = js;
+}
+
+JavaScript javascript;
+
 int simWidth = 160;
 int simHeight = 90;
 
@@ -46,4 +56,9 @@ void draw() {
   text(frameRate, 50, 50);
   fill(test ? color(0, 255, 0) : color(255, 0, 0));
   ellipse(width/2, height/2, 250, 250);
+  
+  if(javascript != null){
+    javascript.showValue(test);
+  }
+  
 }
