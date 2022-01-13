@@ -24,7 +24,6 @@ void setup() {
   pg = createGraphics(simWidth, simHeight);
   pg.noSmooth();
   noSmooth();
-  ((PGraphicsOpenGL)g).textureSampling(3);
 }
 
 boolean test = false;
