@@ -52,10 +52,10 @@ void draw() {
 
   pg.textSize(40);
   pg.endDraw();
-  PImage img = pg.get();
+  PImage img = resizeNx(pg.get(), 10);
   //img.resize(1600, 900);
   //image(img, 0, 0);
-  image(img, 0, 0, 1600, 450);
+  image(img, 0, 0);
   text(frameRate, 50, 50);
   fill(test ? color(0, 255, 0) : color(255, 0, 0));
   ellipse(width/2, height/2, 250, 250);
@@ -63,4 +63,25 @@ void draw() {
   if (javascript != null) {
     javascript.showValue(test);
   }
+}
+
+PImage resizeNx(PImage input, int n) {
+  PImage ret = new PImage(input.width*n, input.height*n);
+  ret.loadPixels();
+  input.loadPixels();
+  float ratio = 1.0f/n;
+  float px;
+  float py;
+
+  for (int i = 0; i < ret.height; i++) {
+    for (int j = 0; j < ret.width; j++) {
+      px = floor(j*ratio);
+      py = floor(i*ratio);
+      ret.pixels[(i*ret.width)+j] = input.pixels[(int)((py*input.width)+px)];
+    }
+  }
+  ret.updatePixels();
+
+
+  return ret;
 }
