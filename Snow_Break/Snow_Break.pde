@@ -25,5 +25,6 @@ void draw() {
     }
   }
   fill(255, 0, 0);
+  textSize(40);
   text(frameRate, 50, 50);
 }
