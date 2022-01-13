@@ -9,7 +9,7 @@ void bindJavaScript(JavaScript js) {
 JavaScript javascript;
 
 int simWidth = 160;
-int simHeight = 90;
+int simHeight = 45;
 
 float[][] densities;
 
@@ -18,7 +18,7 @@ PGraphics pg;
 
 
 void setup() {
-  size(1600, 900, P2D);
+  size(1600, 450, P2D);
   background(0);
   densities = new float[simWidth][simHeight];
   pg = createGraphics(simWidth, simHeight);
@@ -54,7 +54,7 @@ void draw() {
   PImage img = pg.get();
   //img.resize(1600, 900);
   //image(img, 0, 0);
-  image(img, 0, 0, 1600, 900);
+  image(img, 0, 0, 1600, 450);
   text(frameRate, 50, 50);
   fill(test ? color(0, 255, 0) : color(255, 0, 0));
   ellipse(width/2, height/2, 250, 250);
