@@ -25,7 +25,6 @@ void draw() {
   }
 
   pg.loadPixels();
-  println(pg.width*pg.height);
   for (int i = 0; i < pg.width*pg.height; i++) {
     pg.pixels[i] = color((int)random(0, 255), (int)random(0, 255), (int)random(0, 255));
   }
@@ -33,9 +32,9 @@ void draw() {
 
 
   pg.textSize(40);
-  pg.text("fps: " + frameRate, 50, 50);
   pg.endDraw();
   PImage img = pg.get();
   img.resize(1600, 900);
   image(img, 0, 0);
+  text(frameRate, 50, 50);
 }
