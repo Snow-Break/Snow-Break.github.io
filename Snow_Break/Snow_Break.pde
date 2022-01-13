@@ -15,8 +15,15 @@ void draw() {
   noStroke();
   for (int i = 0; i < 200; i++) {
     for (int j = 0; j < 40; j++) {
+      densities[i][j] = random(0, 255);
+    }
+  }
+  for (int i = 0; i < 200; i++) {
+    for (int j = 0; j < 40; j++) {
       fill(densities[i][j]);
       rect(i * 5, j * 5, 5, 5);
     }
   }
+  fill(255, 0, 0);
+  text(frameRate, 50, 50);
 }
