@@ -1,8 +1,8 @@
-interface JavaScript{
+interface JavaScript {
   void showValue(boolean val);
 }
 
-void bindJavaScript(JavaScript js){
+void bindJavaScript(JavaScript js) {
   javascript = js;
 }
 
@@ -18,16 +18,17 @@ PGraphics pg;
 
 
 void setup() {
-  size(1600, 900);
+  size(1600, 900, OPENGL);
   background(0);
   densities = new float[simWidth][simHeight];
   pg = createGraphics(simWidth, simHeight);
   pg.noSmooth();
+  ((PGraphicsOpenGL)g).textureSampling(3);
 }
 
 boolean test = false;
 
-void changeValue(){
+void changeValue() {
   test = !test;
 }
 
@@ -43,7 +44,8 @@ void draw() {
 
   pg.loadPixels();
   for (int i = 0; i < pg.width*pg.height; i++) {
-    pg.pixels[i] = color((int)random(0, 255), (int)random(0, 255), (int)random(0, 255));
+    float bright = random(0, 255);
+    pg.pixels[i] = color(bright, bright, bright);
   }
   pg.updatePixels();
 
@@ -56,9 +58,8 @@ void draw() {
   text(frameRate, 50, 50);
   fill(test ? color(0, 255, 0) : color(255, 0, 0));
   ellipse(width/2, height/2, 250, 250);
-  
-  if(javascript != null){
+
+  if (javascript != null) {
     javascript.showValue(test);
   }
-  
 }
