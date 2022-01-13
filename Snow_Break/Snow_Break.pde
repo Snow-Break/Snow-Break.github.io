@@ -22,6 +22,7 @@ void setup() {
   background(0);
   densities = new float[simWidth][simHeight];
   pg = createGraphics(simWidth, simHeight);
+  pg.hint(DISABLE_OPENGL_2X_SMOOTH);
   pg.noSmooth();
   noSmooth();
 }
