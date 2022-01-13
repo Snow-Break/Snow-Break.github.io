@@ -18,12 +18,12 @@ PGraphics pg;
 
 
 void setup() {
-  size(1600, 450, P2D);
+  size(1600, 450);
   background(0);
   densities = new float[simWidth][simHeight];
   pg = createGraphics(simWidth, simHeight);
-  pg.hint(DISABLE_OPENGL_2X_SMOOTH);
-  pg.noSmooth();
+  //pg.smooth = 0;
+  //pg.noSmooth();
   noSmooth();
 }
 
