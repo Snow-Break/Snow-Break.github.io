@@ -15,6 +15,12 @@ void setup() {
   pg.noSmooth();
 }
 
+boolean test = false;
+
+void changeValue(){
+  test = !test;
+}
+
 void draw() {
   frameRate(3);
   pg.beginDraw();
@@ -38,4 +44,6 @@ void draw() {
   img.resize(1600, 900);
   image(img, 0, 0);
   text(frameRate, 50, 50);
+  fill(test ? color(0, 255, 0) : color(255, 0, 0));
+  ellipse(width/2, height/2, 250, 250);
 }
