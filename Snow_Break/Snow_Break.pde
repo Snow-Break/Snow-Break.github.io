@@ -8,8 +8,8 @@ void bindJavaScript(JavaScript js) {
 
 JavaScript javascript;
 
-int simWidth = 160;
-int simHeight = 45;
+int simWidth = 320;
+int simHeight = 90;
 
 float[][] densities;
 
@@ -52,7 +52,7 @@ void draw() {
 
   pg.textSize(40);
   pg.endDraw();
-  PImage img = resizeNx(pg.get(), 10);
+  PImage img = resizeNx(pg.get(), width/simWidth);
   //img.resize(1600, 900);
   //image(img, 0, 0);
   image(img, 0, 0);
