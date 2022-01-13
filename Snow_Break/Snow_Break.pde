@@ -22,8 +22,8 @@ void setup() {
   background(0);
   densities = new float[simWidth][simHeight];
   pg = createGraphics(simWidth, simHeight);
-  //pg.smooth = 0;
-  //pg.noSmooth();
+  pg.smooth = 0;
+  pg.noSmooth();
   noSmooth();
 }
 
