@@ -18,11 +18,12 @@ PGraphics pg;
 
 
 void setup() {
-  size(1600, 900, OPENGL);
+  size(1600, 900, P2D);
   background(0);
   densities = new float[simWidth][simHeight];
   pg = createGraphics(simWidth, simHeight);
   pg.noSmooth();
+  noSmooth();
   ((PGraphicsOpenGL)g).textureSampling(3);
 }
 
