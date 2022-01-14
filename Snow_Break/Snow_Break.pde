@@ -15,8 +15,6 @@ float[][] densities;
 
 PGraphics pg;
 
-
-
 void setup() {
   size(1600, 450);
   background(0);
@@ -65,7 +63,7 @@ void draw() {
   }
 }
 
-PImage resizeNx(PImage input, int n) {
+PImage resizeNxFloat(PImage input, int n) {
   PImage ret = new PImage(input.width*n, input.height*n);
   ret.loadPixels();
   input.loadPixels();
@@ -81,7 +79,25 @@ PImage resizeNx(PImage input, int n) {
     }
   }
   ret.updatePixels();
+  return ret;
+}
 
 
+PImage resizeNx(PImage input, int n) {
+  PImage ret = new PImage(input.width*n, input.height*n);
+  ret.loadPixels();
+  input.loadPixels();
+  int ratio = (int) ((input.width<<16)/(ret.width)) + 1;
+  int x2;
+  int y2;
+
+  for (int i = 0; i < ret.height; i++) {
+    for (int j = 0; j < ret.width; j++) {
+      x2 = ((j*ratio)>>16);
+      y2 = ((i*ratio)>>16);
+      ret.pixels[(i*ret.width)+j] = input.pixels[(y2*input.width)+x2];
+    }
+  }
+  ret.updatePixels();
   return ret;
 }
