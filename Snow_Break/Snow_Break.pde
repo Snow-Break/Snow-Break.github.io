@@ -15,6 +15,8 @@ float[][] densities;
 
 PGraphics pg;
 
+
+
 void setup() {
   size(1600, 450);
   background(0);
@@ -23,7 +25,6 @@ void setup() {
   pg.smooth = 0;
   pg.noSmooth();
   noSmooth();
-  displayImage = new PImage(simWidth*10, simHeight*10);
 }
 
 boolean test = false;
@@ -51,10 +52,10 @@ void draw() {
 
   pg.textSize(40);
   pg.endDraw();
-  resizeNx(pg.get());
+  PImage img = resizeNx(pg.get(), width/simWidth);
   //img.resize(1600, 900);
   //image(img, 0, 0);
-  image(displayImage, 0, 0);
+  image(img, 0, 0);
   text(frameRate, 50, 50);
   fill(test ? color(0, 255, 0) : color(255, 0, 0));
   ellipse(width/2, height/2, 250, 250);
@@ -64,21 +65,23 @@ void draw() {
   }
 }
 
-PImage displayImage;
-
-void resizeNx(PImage input) {
-  displayImage.loadPixels();
+PImage resizeNx(PImage input, int n) {
+  PImage ret = new PImage(input.width*n, input.height*n);
+  ret.loadPixels();
   input.loadPixels();
-  float ratio = 1.0f/10.0f;
+  float ratio = 1.0f/n;
   float px;
   float py;
 
-  for (int i = 0; i < displayImage.height; i++) {
-    for (int j = 0; j < displayImage.width; j++) {
+  for (int i = 0; i < ret.height; i++) {
+    for (int j = 0; j < ret.width; j++) {
       px = floor(j*ratio);
       py = floor(i*ratio);
-      displayImage.pixels[(i*displayImage.width)+j] = input.pixels[(int)((py*input.width)+px)];
+      ret.pixels[(i*ret.width)+j] = input.pixels[(int)((py*input.width)+px)];
     }
   }
-  displayImage.updatePixels();
+  ret.updatePixels();
+
+
+  return ret;
 }
