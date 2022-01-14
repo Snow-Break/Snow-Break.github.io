@@ -53,7 +53,8 @@ void draw() {
     sim.pixels[i] = color(bright, bright, bright);
   }
   sim.updatePixels();
-  disp = resizeNx(sim, width/simWidth);
+  //disp = resizeNx(sim, width/simWidth);
+  resizeNx(sim, width/simWidth);
   image(disp, 0, 0);
   /*
   PImage img = resizeNx(pg.get(), width/simWidth);
@@ -71,6 +72,8 @@ void draw() {
   }
 }
 
+
+/*
 PImage resizeNx(PImage input, int n) {
   PImage ret = new PImage(input.width*n, input.height*n);
   ret.loadPixels();
@@ -88,4 +91,24 @@ PImage resizeNx(PImage input, int n) {
   }
   ret.updatePixels();
   return ret;
+}
+
+*/
+
+
+void resizeNx(PImage input, int n) {
+  disp.loadPixels();
+  input.loadPixels();
+  int ratio = (int) ((input.width<<16)/(disp.width)) + 1;
+  int x2;
+  int y2;
+
+  for (int i = 0; i < disp.height; i++) {
+    for (int j = 0; j < disp.width; j++) {
+      x2 = ((j*ratio)>>16);
+      y2 = ((i*ratio)>>16);
+      disp.pixels[(i*disp.width)+j] = input.pixels[(y2*input.width)+x2];
+    }
+  }
+  disp.updatePixels();
 }
