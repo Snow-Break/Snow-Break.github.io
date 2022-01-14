@@ -1,32 +1,31 @@
 interface JavaScript {
   void showValue(boolean val);
 }
-
 void bindJavaScript(JavaScript js) {
   javascript = js;
 }
-
 JavaScript javascript;
 
 int simWidth = 320;
 int simHeight = 90;
-
 float[][] densities;
-
 PGraphics pg;
 
 void setup() {
   size(1600, 450);
   background(0);
   densities = new float[simWidth][simHeight];
+  
+  // why am I using Graphics instead of just an image?
+  // switch to just using an image maybe...
   pg = createGraphics(simWidth, simHeight);
   pg.smooth = 0;
   pg.noSmooth();
   noSmooth();
 }
 
+// test function to be triggered from the website via JavaScript
 boolean test = false;
-
 void changeValue() {
   test = !test;
 }
@@ -34,12 +33,6 @@ void changeValue() {
 void draw() {
   pg.beginDraw();
   pg.noStroke();
-  for (int i = 0; i < simWidth; i++) {
-    for (int j = 0; j < simHeight; j++) {
-      densities[i][j] = random(0, 255);
-    }
-  }
-
   pg.loadPixels();
   for (int i = 0; i < pg.width*pg.height; i++) {
     float bright = random(255);
@@ -56,7 +49,8 @@ void draw() {
   ellipse(width/2, height/2, 250, 250);
 
   if (javascript != null) {
-    javascript.showValue(test);
+    javascript.showValue(test); // triggers JS on the website
+    // the "showValue" function does not exist within the sketch
   }
 }
 
