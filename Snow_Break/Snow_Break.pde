@@ -42,7 +42,8 @@ void draw() {
 
   pg.loadPixels();
   for (int i = 0; i < pg.width*pg.height; i++) {
-    float bright = 255*noise((i%width)/10.0, (i/height)/10.0, frameCount/100.0);
+    float bright = random(255);
+    //float bright = 255*noise((i%width)/10.0, (i/height)/10.0, frameCount/100.0);
     pg.pixels[i] = color(bright, bright, bright);
   }
   pg.updatePixels();
