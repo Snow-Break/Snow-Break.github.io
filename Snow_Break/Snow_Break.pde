@@ -42,18 +42,16 @@ void draw() {
 
   pg.loadPixels();
   for (int i = 0; i < pg.width*pg.height; i++) {
-    float bright = random(0, 255);
+    float bright = 255*noise((i%width)/10.0, (i/height)/10.0, frameCount/100.0);
     pg.pixels[i] = color(bright, bright, bright);
   }
   pg.updatePixels();
-
-
-  pg.textSize(40);
   pg.endDraw();
   PImage img = resizeNx(pg.get(), width/simWidth);
   //img.resize(1600, 900);
   //image(img, 0, 0);
   image(img, 0, 0);
+  textSize(40);
   text(frameRate, 50, 50);
   fill(test ? color(0, 255, 0) : color(255, 0, 0));
   ellipse(width/2, height/2, 250, 250);
