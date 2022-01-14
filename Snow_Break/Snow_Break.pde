@@ -10,15 +10,19 @@ int simWidth = 320;
 int simHeight = 90;
 float[][] densities;
 PGraphics pg;
+PImage sim;
+PImage disp;
 
 void setup() {
   size(1600, 450);
   background(0);
   densities = new float[simWidth][simHeight];
-  
+
   // why am I using Graphics instead of just an image?
   // switch to just using an image maybe...
   pg = createGraphics(simWidth, simHeight);
+  sim = new PImage(simWidth, simHeight);
+  disp = new PImage(width, height);
   pg.smooth = 0;
   pg.noSmooth();
   noSmooth();
@@ -31,18 +35,30 @@ void changeValue() {
 }
 
 void draw() {
+  /*
   pg.beginDraw();
-  pg.noStroke();
-  pg.loadPixels();
+   pg.noStroke();
+   pg.loadPixels();
+   for (int i = 0; i < pg.width*pg.height; i++) {
+   float bright = random(255);
+   //float bright = 255*noise((i%width)/10.0, (i/height)/10.0, frameCount/100.0);
+   pg.pixels[i] = color(bright, bright, bright);
+   }
+   pg.updatePixels();
+   pg.endDraw();
+   */
+  sim.loadPixels();
   for (int i = 0; i < pg.width*pg.height; i++) {
     float bright = random(255);
-    //float bright = 255*noise((i%width)/10.0, (i/height)/10.0, frameCount/100.0);
-    pg.pixels[i] = color(bright, bright, bright);
+    sim.pixels[i] = color(bright, bright, bright);
   }
-  pg.updatePixels();
-  pg.endDraw();
+  sim.updatePixels();
+  disp = resizeNx(sim, width/simWidth);
+  image(disp, 0, 0);
+  /*
   PImage img = resizeNx(pg.get(), width/simWidth);
-  image(img, 0, 0);
+   image(img, 0, 0);
+   */
   textSize(40);
   text(frameRate, 50, 50);
   fill(test ? color(0, 255, 0) : color(255, 0, 0));
