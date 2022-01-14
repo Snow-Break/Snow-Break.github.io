@@ -49,8 +49,6 @@ void draw() {
   pg.updatePixels();
   pg.endDraw();
   PImage img = resizeNx(pg.get(), width/simWidth);
-  //img.resize(1600, 900);
-  //image(img, 0, 0);
   image(img, 0, 0);
   textSize(40);
   text(frameRate, 50, 50);
@@ -61,26 +59,6 @@ void draw() {
     javascript.showValue(test);
   }
 }
-
-PImage resizeNxFloat(PImage input, int n) {
-  PImage ret = new PImage(input.width*n, input.height*n);
-  ret.loadPixels();
-  input.loadPixels();
-  float ratio = 1.0f/n;
-  float px;
-  float py;
-
-  for (int i = 0; i < ret.height; i++) {
-    for (int j = 0; j < ret.width; j++) {
-      px = floor(j*ratio);
-      py = floor(i*ratio);
-      ret.pixels[(i*ret.width)+j] = input.pixels[(int)((py*input.width)+px)];
-    }
-  }
-  ret.updatePixels();
-  return ret;
-}
-
 
 PImage resizeNx(PImage input, int n) {
   PImage ret = new PImage(input.width*n, input.height*n);
