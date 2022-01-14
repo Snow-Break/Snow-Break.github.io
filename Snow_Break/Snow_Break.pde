@@ -67,6 +67,7 @@ void draw() {
   if (javascript != null) {
     javascript.showValue(test); // triggers JS on the website
     // the "showValue" function does not exist within the sketch
+    // but within the website that this sketch runs on
   }
 }
 
