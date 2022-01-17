@@ -17,6 +17,15 @@ int simHeight = 90;    // simulation domain
 PImage sim;            // we probably don't need this...
 PImage disp;           // image for displaying the simulation output
 
+// initialize all the necessary arrays
+void init(){
+  initUnitVelocities();
+  initDistributions();
+  initDensities();
+  initVelocities();
+  initEquilibriumDistributions();
+}
+
 // initialize the moore-neighborhood directions/velocities
 void initUnitVelocities(){
   unitVelocities = new PVector[9];

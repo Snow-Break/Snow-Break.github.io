@@ -14,3 +14,50 @@ float w(int i) {
     return 1.0f/36.0f;
   }
 }
+
+// move particles
+void stream() {
+  float[][][] newDistributions = new float[simWidth][simHeight][9];
+  for (int i = 0; i < simWidth; i++) {
+    for (int j = 0; j < simHeight; j++) {
+      for (int k = 0; k < 9; k++) {
+        PVector e = unitVelocities[k];
+        int xDir = (int) e.x;
+        int yDir = (int) e.y;
+        int newi = i + xDir;
+        int newj = j + yDir;
+
+        if (newi == simWidth) {
+          newi = 0;
+        }
+        if (newi == -1) {
+          newi = simWidth - 1;
+        }
+
+        if (newj == simHeight) {
+          newj = 0;
+        }
+        if (newj == -1) {
+          newj = simHeight - 1;
+        }
+
+        newDistributions[newi][newj][k] += distributions[i][j][k];
+      }
+    }
+  }
+  distributions = newDistributions;
+}
+
+// relax some particles back to their equilibrium
+void collide() {
+  for (int i = 0; i < simWidth; i++) {
+    for (int j = 0; j < simHeight; j++) {
+      for (int k = 0; k < 9; k++) {
+        float localStress = unitVelocities[k].x * unitVelocities[k].y * (distributions[i][j][k] - equilibriumDistributions[i][j][k]);
+        float localStressTensorMagnitude = (-tau + sqrt(tau * tau + 18 * lambdaSquared * scSquared * abs(localStress))) / (6 * lambda * lambda * smagorinskyConstant * smagorinskyConstant);
+        float correctedTau = tau + 3 * lambdaSquared * scSquared * localStressTensorMagnitude;
+        distributions[i][j][k] = distributions[i][j][k] - (1.0f/correctedTau) * (distributions[i][j][k] - equilibriumDistributions[i][j][k]);
+      }
+    }
+  }
+}
