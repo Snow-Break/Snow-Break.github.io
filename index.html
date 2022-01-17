@@ -16,7 +16,7 @@
 		var bound = false;
 		
 		function bindJavascript(){
-			var processingSketch = Processing.getInstanceById('game');
+			var  processingSketch = Processing.getInstanceById('game');
 			if(processingSketch != null){
 				processingSketch.bindJavaScript(this); // this "bindJavaScript" is a function in the .pde file
 				bound = true;
@@ -37,7 +37,7 @@
 </head>
 
 <body>
-	<canvas id="game" data-processing-sources="/Snow_Break/Snow_Break.pde"></canvas>
+	<canvas id="game" data-processing-sources="/Snow_Break/Snow_Break.pde /Snow_Break/initSimn.pde"></canvas>
 	<br />
 	<button onclick="changeVal('game')"> Example Button </button>
 	<br />
