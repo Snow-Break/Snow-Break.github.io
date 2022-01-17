@@ -11,10 +11,11 @@ JavaScript javascript;
 void setup() {
   size(1600, 450);
   background(0);
-  densities = new float[simWidth][simHeight];
   sim = new PImage(simWidth, simHeight);
   disp = new PImage(width, height);
   noSmooth();
+
+  init();
 }
 
 // test function to be triggered from the website via JavaScript
@@ -23,14 +24,21 @@ void changeValue() {
   test = !test;
 }
 
-void draw() {
+
+// display the simulation
+void show() {
   sim.loadPixels();
-  for (int i = 0; i < sim.width*sim.height; i++) {
-    //float bright = random(255);
-    float bright = 255*noise((i%sim.width)/10.0, (i/sim.width)/10.0, frameCount/100.0);
-    sim.pixels[i] = color(bright, bright, bright);
+  for (int i = 0; i < simWidth; i++) {
+    for (int j = 0; j < simHeight; j++) {
+      //sim.pixels[xywToI(i, j, simHeight)] = (int)map(densities[i][j]*densities[i][j], 0, 1500000, 0, 255);
+      sim.pixels[xywToI(i, j, simHeight)] = color((int)random(0, 255), (int)random(0, 255), (int)random(0, 255));
+    }
   }
   sim.updatePixels();
+}
+
+void draw() {
+  show();
   resizeNx(sim, width/simWidth);
   image(disp, 0, 0);
   textSize(40);
@@ -43,6 +51,12 @@ void draw() {
     // the "showValue" function does not exist within the sketch
     // but within the website that this sketch runs on
   }
+
+  stream();
+  initDensities();
+  initVelocities();
+  initEquilibriumDistributions();
+  collide();
 }
 
 void resizeNx(PImage input, int n) {
@@ -60,4 +74,8 @@ void resizeNx(PImage input, int n) {
     }
   }
   disp.updatePixels();
+}
+
+int xywToI(int x, int y, int w) {
+  return y * w + x;
 }
