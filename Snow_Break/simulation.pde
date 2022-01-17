@@ -61,3 +61,45 @@ void collide() {
     }
   }
 }
+
+
+// calculate densities
+void calcDensities() {
+  for (int i = 0; i < simWidth; i++) {
+    for (int j = 0; j < simHeight; j++) {
+      float d = 0;
+      for (int k = 0; k < 9; k++) {
+        d += distributions[i][j][k];
+      }
+      densities[i][j] = d;
+    }
+  }
+}
+
+// calculate avg velocities
+void calcVelocities() {
+  for (int i = 0; i < simWidth; i++) {
+    for (int j = 0; j < simHeight; j++) {
+      float d = densities[i][j];
+      PVector weighedVelocity = new PVector(0, 0);
+      for (int k = 0; k < 9; k++) {
+        weighedVelocity.add(PVector.mult(unitVelocities[k], c * distributions[i][j][k]));
+      }
+      weighedVelocity.div(d);
+      velocities[i][j] = weighedVelocity;
+    }
+  }
+}
+
+// calculate desired particle distribution
+void calcEquilibriumDistributions() {
+  for (int i = 0; i < simWidth; i++) {
+    for (int j = 0; j < simHeight; j++) {
+      PVector u = velocities[i][j];
+      float rho = densities[i][j];
+      for (int k = 0; k < 9; k++) {
+        equilibriumDistributions[i][j][k] = rho * (w(k) + s(k, u));
+      }
+    }
+  }
+}

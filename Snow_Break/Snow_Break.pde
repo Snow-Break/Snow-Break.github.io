@@ -54,9 +54,9 @@ void draw() {
   }
 
   stream();
-  initDensities();
-  initVelocities();
-  initEquilibriumDistributions();
+  calcDensities();
+  calcVelocities();
+  calcEquilibriumDistributions();
   collide();
 }
 
