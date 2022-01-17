@@ -30,8 +30,9 @@ void show() {
   sim.loadPixels();
   for (int i = 0; i < simWidth; i++) {
     for (int j = 0; j < simHeight; j++) {
-      //sim.pixels[xywToI(i, j, simHeight)] = (int)map(densities[i][j]*densities[i][j], 0, 1500000, 0, 255);
-      sim.pixels[xywToI(i, j, simHeight)] = color((int)random(0, 255), (int)random(0, 255), (int)random(0, 255));
+      int mappedDensity = (int)map(densities[i][j]*densities[i][j], 0, 1500000, 0, 255);
+      sim.pixels[xywToI(i, j, simWidth)] = color(mappedDensity, mappedDensity, mappedDensity);
+      //sim.pixels[xywToI(i, j, simWidth)] = color((int)random(0, 255), (int)random(0, 255), (int)random(0, 255));
     }
   }
   sim.updatePixels();
