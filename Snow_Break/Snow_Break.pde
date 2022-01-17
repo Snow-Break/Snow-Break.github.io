@@ -6,11 +6,7 @@ void bindJavaScript(JavaScript js) {
 }
 JavaScript javascript;
 
-int simWidth = 320;
-int simHeight = 90;
-float[][] densities;
-PImage sim;
-PImage disp;
+
 
 void setup() {
   size(1600, 450);
