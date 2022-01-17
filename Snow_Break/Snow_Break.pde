@@ -6,15 +6,12 @@ void bindJavaScript(JavaScript js) {
 }
 JavaScript javascript;
 
-
-
 void setup() {
   size(1600, 450);
   background(0);
-  sim = new PImage(simWidth, simHeight);
+  //sim = new PImage(simWidth, simHeight);
   disp = new PImage(width, height);
   noSmooth();
-
   init();
 }
 
@@ -27,21 +24,30 @@ void changeValue() {
 
 // display the simulation
 void show() {
-  sim.loadPixels();
+  disp.loadPixels();
   for (int i = 0; i < simWidth; i++) {
     for (int j = 0; j < simHeight; j++) {
-      int mappedDensity = (int)map(densities[i][j]*densities[i][j], 0, 1500000, 0, 255);
-      sim.pixels[xywToI(i, j, simWidth)] = color(mappedDensity, mappedDensity, mappedDensity);
-      //sim.pixels[xywToI(i, j, simWidth)] = color((int)random(0, 255), (int)random(0, 255), (int)random(0, 255));
+      int mappedDensity = (int)map(densities[i][j]*densities[i][j], 0, 1300000, 0, 255);
+      //sim.pixels[xywToI(i, j, simWidth)] = color(mappedDensity, mappedDensity, mappedDensity);
+      int strechRatio = width/simWidth;
+      for(int x = i * strechRatio; x < (i + 1) * strechRatio; x++){
+        for(int y = j * strechRatio; y < (j + 1) * strechRatio; y++){
+          if(i == 5 && j == 10 && frameCount == 1){
+            println("x = " + x + ", y = " + y + ", i = " + xywToI(x, y, disp.width));
+          }
+          disp.pixels[xywToI(x, y, disp.width)] = color(mappedDensity, mappedDensity, mappedDensity);
+        }
+      }
     }
   }
-  sim.updatePixels();
+  disp.updatePixels();
+  image(disp, 0, 0);
 }
 
 void draw() {
   show();
-  resizeNx(sim, width/simWidth);
-  image(disp, 0, 0);
+  //resizeNx(sim, width/simWidth);
+  
   textSize(40);
   text(frameRate, 50, 50);
   fill(test ? color(0, 255, 0) : color(255, 0, 0));
